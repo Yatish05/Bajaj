@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/bfhl")
 @CrossOrigin(origins = "*")
 public class BfhlController {
 
@@ -20,16 +19,23 @@ public class BfhlController {
         this.bfhlService = bfhlService;
     }
 
-    @PostMapping
+    @PostMapping("/bfhl")
     public ResponseEntity<BfhlResponseDto> processInput(@RequestBody BfhlRequestDto requestDto) {
         BfhlResponseDto responseDto = bfhlService.processData(requestDto);
         return ResponseEntity.ok(responseDto);
     }
 
-    @GetMapping
+    @GetMapping("/bfhl")
     public ResponseEntity<Map<String, Object>> getOperationCode() {
         Map<String, Object> response = new HashMap<>();
         response.put("operation_code", 1);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, Object>> getHealth() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "UP");
         return ResponseEntity.ok(response);
     }
 }

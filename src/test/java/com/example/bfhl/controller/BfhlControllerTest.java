@@ -26,6 +26,13 @@ public class BfhlControllerTest {
     }
 
     @Test
+    public void testHealthRoute() throws Exception {
+        mockMvc.perform(get("/health"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("UP"));
+    }
+
+    @Test
     public void testPostRouteSuccess() throws Exception {
         String requestJson = "{\"data\": [\"a\", \"1\", \"334\", \"4\", \"R\", \"$\"]}";
         mockMvc.perform(post("/bfhl")
